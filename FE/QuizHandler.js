@@ -44,6 +44,7 @@ function loadQuestion() {
     const question = quizData[currentQuestion];
     questionEl.textContent = question.question;
     optionsEl.innerHTML = '';
+
     question.options.forEach((option, index) => {
         const button = document.createElement('button');
         button.textContent = option;
@@ -142,6 +143,10 @@ function showResults() {
         alert('Username not found, Please log in again');
         window.location.href = 'http://localhost:5500/login.html';
     }
+}
+
+function updateSession(){
+
 }
 
 nextBtn.addEventListener('click', () => {
