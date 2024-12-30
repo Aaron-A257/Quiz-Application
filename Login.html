@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="response"></div>
+    <div class="login-container">
+        <h2 class="login-header">Welcome to Quizzy!</h2> 
+        <p>Your one stop destination for all geography related quizzes!</p> 
+        <p>Enter a Username to record your Score</p>
+        <form class="login-form" method="POST" onsubmit="SendUsername(event)"> 
+            <div class="form-group">
+                <label for="username" class="form-username-label">Username</label>
+                <input type="text" id="username" class="form-username-input" required>
+                <label for = "password" class = "form-password-label">Password</label>
+                <input type = "password" id = "password" class = "form-password-input" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>   
+        </form>     
+        <div class = "register-link-container">
+            <a href="register.html" class="register-link">Register an Account</a>   
+        </div> 
+    </div>
+
+    <script>
+        function SendUsername(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+
+            fetch("http://localhost:80/login.php", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem('username', username);
+                    
+                    window.location.href = "http://localhost:5500/Geography.html";
+                } else {
+                    document.getElementById('response').innerHTML = data.message || 'Login Failed';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

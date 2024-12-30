@@ -1,0 +1,149 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    background-image: url("Globe.jpeg"); /* Use your globe image */
+    background-size: 73%; 
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-color: #000; /* Add a dark background color */
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.6);
+    padding: 30px;
+    max-width: 450px; 
+    width: 100%; 
+    margin-left: auto;
+    margin-right: 50px;
+    text-align: center; /* Center text within the container */
+    color:#fff;
+}
+
+.login-container p{
+    margin-top: 70px;   
+    color:#fff;
+    font-size: 1.5rem;
+}
+
+
+
+
+.login-header {
+    color: #fff;
+    text-align: center;
+    
+    font-size: 24px; 
+    width: 100%; /* Make header span the container width */
+}
+.login-header h3{
+    
+    color:#fff;
+    font-size: 1.5rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.form-group {
+    
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding:5px; 
+    margin-bottom: 35px;
+
+}
+
+.form-username-label {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: left; 
+    margin-left: 65px;
+    width: 100%; /* Make label span the container width */
+    margin-bottom: 3px;
+}
+
+.form-username-input{
+    padding: 10px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    width: 80%; 
+    margin: 0 auto; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-password-label {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: left; 
+    margin-left: 65px;
+    width: 100%; /* Make label span the container width */
+    
+}
+
+.form-password-input{
+    padding: 10px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    width: 80%; 
+    margin: 0 auto; 
+    text-align: center;
+}
+
+.login-button {
+    background-color: #592b77;
+    color: #fff;
+    padding: 18.5px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 280px; 
+    margin-left: 0; 
+    font-size: 1.2rem;
+}
+
+
+
+.login-button:hover {
+    background-color: #7e57c2;
+    transform: scale(1.01);
+}
+
+.register-link-container {
+    color: #fff;
+    display: flex;
+    text-align: right;
+    display: block;
+    margin-top: 20px;
+    margin-right: 10%;
+    font-size: 1rem;
+    text-decoration: none;
+}
+.register-link-container a{
+    text-decoration: none;
+    color: #ff0;
+    font-size:1.2rem;
+}
+
+.register-link-container:hover {
+    text-decoration:underline;
+    color: #ff0; /* Change this to your desired hover text color */
+    
+}
+

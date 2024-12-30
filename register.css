@@ -1,0 +1,100 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    background-image: url("Globe.jpeg"); /* Use your globe image */
+    background-size: 73%; 
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-color: #000; /* Add a dark background color */
+}
+
+.register-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.6);
+    padding: 30px;
+    max-width: 450px; 
+    width: 100%; 
+    margin-left: auto;
+    margin-right: 50px;
+    text-align: center; 
+    color: #fff;
+}
+
+.register-header {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.register-subheader {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 0 15px;
+}
+
+.form-group {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-label {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    padding: 10px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    width: 90%;
+}
+
+.register-button {
+    background-color: #592b77;
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+.register-button:hover {
+    background-color: #7e57c2;
+    transform: scale(1.01);
+}
+
+.login-link-container {
+    color: #fff;
+    margin-top: 20px;
+}
+
+.login-link {
+    text-decoration: none;
+    color: #ff0;
+    font-size: 1.2rem;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+    color: #ff0;
+}
