@@ -23,7 +23,8 @@ const quizData = [
         question: "Which element has the chemical symbol 'O'?",
         options: ["Gold", "Silver", "Oxygen", "Iron"],
         correct: 2
-    }
+    },
+    
 ];
 
 let currentQuestion = 0;
@@ -39,25 +40,78 @@ const timerEl = document.getElementById('timer');
 const progressBar = document.querySelector('.progress-bar');
 const quizContainer = document.getElementById('quiz');
 const questionNumberEl = document.getElementById('question-number');
+const scoreContainer = document.getElementById('score-container');
+
+function isSessionActive(){
+    const username = localStorage.getItem('username');
+    if(username){
+        const params = new URLSearchParams();
+        params.append('username', localStorage.getItem('username'));
+        const queryString = params.toString();
+        const url = `http://localhost:80/login.php?${queryString}`;
+        return fetch(url, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data =>{ 
+            console.log(data.status);
+            return data.status;
+        })
+    }else{
+        return false;
+    }
+}
 
 function loadQuestion() {
-    const question = quizData[currentQuestion];
-    questionEl.textContent = question.question;
-    optionsEl.innerHTML = '';
+    if (!isSessionActive()) {
+        console.log("Redirect");
+        window.location.href = 'http://localhost:5500/login.html';
+    } else {
+        // NEW: Added this section to check quiz completion status
+        const params = new URLSearchParams();
+        params.append('username', localStorage.getItem('username'));
+        const queryString = params.toString();
+        const url = `http://localhost:80/login.php?${queryString}`;
+        
+        // NEW: Added fetch request
+        fetch(url, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            // NEW: Check if quiz already taken
+            if (data.has_taken_quiz) {
+                quizContainer.innerHTML = `
+                    <div class="results">
+                        <h2>You have already taken this quiz!</h2>
+                        <p>Each user can only take the quiz once.</p>
+                        <button class="btn btn-primary btn-custom" onclick="window.location.href='login.html'">Back to Login</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // ORIGINAL CODE moved inside the fetch response
+            const question = quizData[currentQuestion];
+            questionEl.textContent = question.question;
+            optionsEl.innerHTML = '';
 
-    question.options.forEach((option, index) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option');
-        button.addEventListener('click', () => selectOption(button, index));
-        optionsEl.appendChild(button);
-    });
-    nextBtn.style.display = 'none';
-    timeLeft = 30;
-    if (timer) clearInterval(timer);
-    startTimer();
-    updateProgress();
-    updateQuestionNumber();
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option');
+                button.addEventListener('click', () => selectOption(button, index));
+                optionsEl.appendChild(button);
+            });
+            nextBtn.style.display = 'none';
+            checkBtn.style.display = 'block';
+            timeLeft = 30;
+            if (timer) clearInterval(timer);
+            startTimer();
+            updateProgress();
+            updateQuestionNumber();
+        });
+    }
 }
 
 function selectOption(selectedButton, optionIndex) {
@@ -97,7 +151,7 @@ function checkAnswer() {
 
     Array.from(optionsEl.children).forEach(button => button.disabled = true);
     clearInterval(timer);
-    checkBtn.style.display = 'block';
+    checkBtn.style.display = 'none';
     nextBtn.style.display = 'block';
 }
 
@@ -116,7 +170,7 @@ function showResults() {
         formData.append('username', username);
         formData.append('score', score);
 
-        fetch("http://localhost:80/hello.php",{
+        fetch("http://localhost:80/SendScore.php",{
             method: 'POST',
             body: formData
         })
@@ -130,7 +184,7 @@ function showResults() {
                     </div>
                     <div class="score">Your score: ${score}/${quizData.length}</div>
                     <p>${score > quizData.length / 2 ? 'Great job!' : 'Better luck next time!'}</p>
-                    <button class="btn btn-primary" onclick="location.reload()">Restart Quiz</button>
+                    
                 </div>
             `;
             }else{
@@ -138,6 +192,12 @@ function showResults() {
             }
         })
         .catch(error => console.error('Error:', error));
+        fetch("http://localhost:80/SendScore.php",{
+            method: 'POST',
+            body: formData
+        })
+        .then
+
     
     }else{
         alert('Username not found, Please log in again');
@@ -145,17 +205,16 @@ function showResults() {
     }
 }
 
-function updateSession(){
 
-}
 
 nextBtn.addEventListener('click', () => {
-    checkAnswer();
+    
     currentQuestion++;
     if (currentQuestion < quizData.length) {
         loadQuestion();
     } else {
         showResults();
+        
     }
 });
 
@@ -171,6 +230,9 @@ checkBtn.addEventListener('click', checkAnswer);
     
 
 loadQuestion();
+
+
+
 
 
 
