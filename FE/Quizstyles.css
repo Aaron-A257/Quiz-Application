@@ -175,7 +175,7 @@ body {
     width: 0%; /* Initially, the bar is empty */
     border-radius: 15px;
     
-    background-color: #592b77; /* Progress bar color (same as correct answer) */
+    background-color: #592b77; 
     transition: width 0.8s ease; /* Smooth transition for progress bar animation */
 }
 
