@@ -1,17 +1,31 @@
 <?php
 function dbConnection(){
-    $servername = "localhost";
-    $username = "root"; // Default username
-    $password = ""; // Default password (empty)
-    $dbname = "user"; // Your database name
-
-    $connectionObject = new mysqli($servername, $username, $password, $dbname);
+    $connectionObject =  mysqli_connect("localhost", "root", "");
 
     // Check connection
-    if ($connectionObject->connect_error) {
-        die("Connection failed: " . $connectionObject->connect_error);
+    if (!$connectionObject) {
+        die("Connection failed: " . mysqli_connect_error());
     }
+
+    mysqli_query($connectionObject, "
+        CREATE DATABASE IF NOT EXISTS user
+    ");
+
+    mysqli_query($connectionObject, "
+        USE user
+     ");
+
+     mysqli_query($connectionObject, "
+        CREATE TABLE IF NOT EXISTS userdetails (
+        username VARCHAR(30) NOT NULL PRIMARY KEY,
+        password VARCHAR(30) NOT NULL,
+        score INT(6) DEFAULT 0,
+        has_taken_quiz BOOLEAN DEFAULT FALSE,
+        lastlogin TIMESTAMP)
+     ");
+    
+    
+        
     return $connectionObject;
-    $connectionObject->close();
 }
 ?>

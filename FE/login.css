@@ -143,6 +143,6 @@ body {
 
 .register-link-container:hover {
     text-decoration:underline;
-    color: #ff0;  //on hover color changes to yellow
+    color: #ff0;  /*on hover color changes to yellow*/
 }
 
