@@ -113,11 +113,16 @@ function loadQuestion() {
         });
     }
 }
-
+let selectedOptionIndex = null;
 function selectOption(selectedButton, optionIndex) {
     const buttons = optionsEl.getElementsByClassName('option');
     Array.from(buttons).forEach(button => button.classList.remove('selected'));
     selectedButton.classList.add('selected');
+
+    // Store the selected option index
+    selectedOptionIndex = optionIndex;
+
+    //Show next Button
     nextBtn.style.display = 'block';
 }
 
@@ -133,26 +138,28 @@ function startTimer() {
 }
 
 function checkAnswer() {
-    const selectedOption = document.querySelector('.option.selected');
     const question = quizData[currentQuestion];
 
-    if (selectedOption) {
-        const selectedAnswer = Array.from(optionsEl.children).indexOf(selectedOption);
-        if (selectedAnswer === question.correct) {
+    if (selectedOptionIndex !== null) {
+        const selectedButton = optionsEl.children[selectedOptionIndex];
+        if (selectedOptionIndex === question.correct) {
             score++;
-            selectedOption.classList.add('correct');
+            selectedButton.classList.add('correct');
         } else {
-            selectedOption.classList.add('incorrect');
+            selectedButton.classList.add('incorrect');
             optionsEl.children[question.correct].classList.add('correct');
         }
     } else {
         optionsEl.children[question.correct].classList.add('correct');
     }
 
+    // Disable all options after checking the answer
     Array.from(optionsEl.children).forEach(button => button.disabled = true);
-    clearInterval(timer);
-    checkBtn.style.display = 'none';
+
+    // Show the Next button and hide the Check Answer button
     nextBtn.style.display = 'block';
+    checkBtn.style.display = 'none';
+    clearInterval(timer);
 }
 
 function updateProgress() {
@@ -208,13 +215,14 @@ function showResults() {
 
 
 nextBtn.addEventListener('click', () => {
-    
+    if (checkBtn.style.display !== 'none') {
+        checkAnswer();
+    }
     currentQuestion++;
     if (currentQuestion < quizData.length) {
         loadQuestion();
     } else {
         showResults();
-        
     }
 });
 
