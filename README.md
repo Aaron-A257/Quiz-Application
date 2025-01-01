@@ -4,7 +4,7 @@ Setup Instructions 🚀
 Backend Setup (PHP & MySQL)
 Install XAMPP (includes Apache and MySQL) on your machine.
 Download or clone this repository to your local machine.
-Place the Backend files (like add_transactions.php, db.php, delete_transactions.php, etc.) in the htdocs directory of your XAMPP installation.
+Place the Backend files (like login.php, db.php, register.php, SendScore.php etc.) in the htdocs directory of your XAMPP installation.
 
 
 Open the XAMPP Control Panel, and start the Apache and MySQL services.
@@ -18,10 +18,8 @@ You can open the Login.html file directly in your browser or configure a local s
 
 Running the Application 🔧
 Start Apache and MySQL from the XAMPP Control Panel.
-Open your browser and go to http://localhost/Login.html to access the application.
+Open your browser and go to http://localhost:5500/FE/Login.html or http://127.0.0.1:5500/FE/Login.html to access the application.
 Use the following credentials to test:
 Username : User
 Password: root
 You can now Login to the quiz application
-
-  
