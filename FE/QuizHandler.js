@@ -67,19 +67,19 @@ function loadQuestion() {
         console.log("Redirect");
         window.location.href = 'http://localhost:5500/login.html';
     } else {
-        // NEW: Added this section to check quiz completion status
+       
         const params = new URLSearchParams();
         params.append('username', localStorage.getItem('username'));
         const queryString = params.toString();
         const url = `http://localhost:80/login.php?${queryString}`;
         
-        // NEW: Added fetch request
+        
         fetch(url, {
             method: 'GET'
         })
         .then(response => response.json())
         .then(data => {
-            // NEW: Check if quiz already taken
+            
             if (data.has_taken_quiz) {
                 quizContainer.innerHTML = `
                     <div class="results">
@@ -91,7 +91,7 @@ function loadQuestion() {
                 return;
             }
             
-            // ORIGINAL CODE moved inside the fetch response
+            
             const question = quizData[currentQuestion];
             questionEl.textContent = question.question;
             optionsEl.innerHTML = '';
