@@ -10,7 +10,7 @@ $connectionObject = dbConnection(); // Call the connect db function
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['username'] ?? null;
     $score = $_POST['score'] ?? null;
-    
+   
     if ($name && $score) {
         $stmt = $connectionObject->prepare("UPDATE userdetails SET score = ?, has_taken_quiz = TRUE WHERE username = ?");
         $stmt->bind_param("is", $score, $name);

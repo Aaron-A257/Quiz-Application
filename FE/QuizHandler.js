@@ -199,13 +199,7 @@ function showResults() {
             }
         })
         .catch(error => console.error('Error:', error));
-        fetch("http://localhost:80/SendScore.php",{
-            method: 'POST',
-            body: formData
-        })
-        .then
 
-    
     }else{
         alert('Username not found, Please log in again');
         window.location.href = 'http://localhost:5500/login.html';
