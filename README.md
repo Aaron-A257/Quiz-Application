@@ -18,7 +18,7 @@ You can open the Login.html file directly in your browser or configure a local s
 
 Running the Application 🔧
 Start Apache and MySQL from the XAMPP Control Panel.
-Open your browser and go to http://localhost/expense-tracker/frontend/userLogin.html to access the application.
+Open your browser and go to http://localhost/Login.html to access the application.
 Use the following credentials to test:
 Username : User
 Password: root
